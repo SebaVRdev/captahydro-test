@@ -1,11 +1,9 @@
 # Ejecutar proyecto
 
----
-
 ## Requisitos previos
 1. **Docker** y **Docker Desktop** deben estar instalados en su sistema.
 2. Tener **Node.js** y **npm** instalados para la gestión de dependencias.
-
+3. Tener **Mysql Workbench** o **Algun gestor de base de datos que permita MYSQL**
 ---
 
 ## Instrucciones de instalación y ejecución
@@ -17,7 +15,7 @@
 
 2. **Acceder a la carpeta del proyecto**
    ```bash
-   cd edutagger
+   cd captahydro-test
    ```
 
 3. **Instalar dependencias**
@@ -47,6 +45,11 @@
   - **Usuario:** root
   - **Contraseña:** seba123
 
+**👁‍🗨 Prueba**
+```bash
+mysql -h 127.0.0.1 -P 3305 -u root -p
+```
+
 Si tienes MySQL instalado localmente, asegúrate de no tener conflictos de puertos con el 3306.
 
 ---
@@ -60,7 +63,7 @@ Si tienes MySQL instalado localmente, asegúrate de no tener conflictos de puert
 ---
 
 ⚠️ **NOTA IMPORTANTE:**
-Los enpoints para solicitar información requieren de que la base de datos este poblada.
+Los enpoints para solicitar información requieren de que la base de datos esté poblada.
 Se recomienda ejecutar el endpoint del scraper con las fechas necesarias para guardar en base de datos. 
 
 ## Endpoints disponibles
@@ -134,11 +137,16 @@ A continuación se describen los cuatro endpoints principales de la API.
 ---
 
 ## Notas importantes
-- **Verifica la configuración del puerto 3305** si tienes MySQL local corriendo en tu máquina, ya que el puerto 3306 suele estar ocupado por la instalación local.
-- La contraseña de la base de datos es **seba123**.
-- El contenedor Docker se asegurará de que la base de datos y la API estén en funcionamiento correctamente.
-
+### En caso de fallar usando docker prueba creando la base de datos manualmente
+```bash
+mysql -h 127.0.0.1 -P 3306 -u root -p
+```
+**Dentro de la consola de MYSQL ejecuta...**
+```bash
+source /ruta/completa/al/archivo/database/init.sql;
+```
+**Con esto se crea la base de datos, por lo que se levanta el proyecto manualmente**
+```bash
+npm run dev
+```
 Para cualquier problema o duda, por favor comuníquese a mi numero de telefono +56 958138659. 
-
-
-
