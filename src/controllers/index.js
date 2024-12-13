@@ -27,12 +27,12 @@ export const getStationById = async (req, res) => {
 
 export const processData = async (req, res) => {
     const { fechaDesde, fechaHasta, obras } = req.body;
-    const process = await processInfo(fechaDesde, fechaHasta, obras);
+    const {info, datosNoExistentes} = await processInfo(fechaDesde, fechaHasta, obras);
     if (!process) {
         return res.status(200).json({message: "La fuente esta con intermitencia, intentelo mas tarde"})
     }
 
-    const insertBD = await CaudalModel.guardarInfoDb(process);
+    const insertBD = await CaudalModel.guardarInfoDb(info);
     if (!insertBD) {
         return res.status(400).json({
             ok: false,
@@ -42,7 +42,8 @@ export const processData = async (req, res) => {
     }
     res.status(200).json({
         ok: true,
-        data: process
+        datosNoExistentes: datosNoExistentes.length > 0 ? datosNoExistentes : "Sin datos inexistntes",
+        data: info
     })
 }
 

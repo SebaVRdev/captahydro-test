@@ -31,18 +31,17 @@ export class CaudalModel {
     static async saveCaudalDB(caudal, obraToSave) {
         const connection = await connect();
         const { caudal: caudalValor, alturaLimnimetrica, fechaHoraMedicion } = caudal;
-        const formattedFechaHoraMedicion = moment(fechaHoraMedicion).format('YYYY-MM-DD HH:mm:ss');
-
+        
         // Verificar si el caudal ya existe para esa obra y fecha
         const [caudalRows] = await connection.execute(
             'SELECT id FROM caudales WHERE codigo_obra = ? AND fecha_hora_medicion = ?',
-        [obraToSave.codigo_obra, formattedFechaHoraMedicion]);
+        [obraToSave.codigo_obra, fechaHoraMedicion]);
                 
         if (caudalRows.length === 0) {
           // Si el caudal no existe, insertarlo
           await connection.execute(
             'INSERT INTO caudales (codigo_obra, caudal, altura_limnimetrica, fecha_hora_medicion) VALUES (?, ?, ?, ?)',
-            [obraToSave.codigo_obra, caudalValor, alturaLimnimetrica, formattedFechaHoraMedicion]
+            [obraToSave.codigo_obra, caudalValor, alturaLimnimetrica, fechaHoraMedicion]
           );
         } 
     }
@@ -63,7 +62,6 @@ export class CaudalModel {
         try {
             for (const obra of data) {
               const { caudales } = obra;
-            
               let obraToSave = await this.obraByCodigo(obra.codigoObra);
                 
               if (!obraToSave) {

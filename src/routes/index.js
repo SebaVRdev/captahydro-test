@@ -24,6 +24,12 @@ const validateDateFormat = (req, res, next) => {
 
     const fechaInicioISO = moment(fecha_inicio).startOf('day').toISOString();  
     const fechaFinISO = moment(fecha_fin).endOf('day').toISOString();
+
+    if (moment(fechaInicioISO).isAfter(moment(fechaFinISO))) {
+        return res.status(400).json({
+            error: 'La fecha de inicio no puede ser posterior a la fecha de fin.'
+        });
+    }
     
     req.body.fechaDesde = fechaInicioISO;
     req.body.fechaHasta = fechaFinISO;
