@@ -10,6 +10,13 @@ const DEFAULT_HEADERS = {
   'Cookie': '__uzmc=721417920890; __uzmd=1733956167'
 };
 
+const DEFAULT_CODIGOS_OBRA = [
+  "OB-1305-1106",
+  "OB-1002-370",
+  "OB-1303-1072",
+  "OB-1303-1255",
+]
+
 async function obtenerToken() {
   try {
     const response = await axios.post(`${BASE_URL}/mee-auth-rest/v1/authorization`, {
