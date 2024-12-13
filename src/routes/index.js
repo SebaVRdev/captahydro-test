@@ -40,6 +40,6 @@ const validateDateFormat = (req, res, next) => {
 router.get('/stations', getStations)
 router.get('/stations/:id', getStationById)
 router.get('/stations/:id/flow', validateDateFormat, getStationByDate)
-router.post('/scraper', validateDateFormat ,processData);
+router.post('/scrape', validateDateFormat ,processData);
 
 export default router;
