@@ -141,7 +141,7 @@ A continuación se describen los cuatro endpoints principales de la API.
 ```bash
 mysql -h 127.0.0.1 -P 3306 -u root -p
 ```
-**Dentro de la consola de MYSQL ejecuta...**
+**Dentro del repositrio esta el archivo /database/init.sql, en la consola de MYSQL ejecuta...**
 ```bash
 source /ruta/completa/al/archivo/database/init.sql;
 ```
@@ -149,4 +149,4 @@ source /ruta/completa/al/archivo/database/init.sql;
 ```bash
 npm run dev
 ```
-Para cualquier problema o duda, por favor comuníquese a mi numero de telefono +56 958138659. 
+Para cualquier problema o duda, por favor comuníquese a mi numero de telefono **+56 958138659**. 
