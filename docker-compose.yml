@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    container_name: captaHydro_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: seba123
+      MYSQL_DATABASE: captahydrotest
+    ports:
+      - "3305:3306"
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+      - db_data:/var/lib/mysql
+
+  app:
+    build: 
+      context: .
+    container_name: backend_captahydro
+    restart: always
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=seba123
+      - DB_NAME=captahydrotest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    command: npm start
+
+volumes:
+  db_data:
